@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbeco <gbeco@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gbeco <gbeco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 10:41:43 by gbeco             #+#    #+#             */
-/*   Updated: 2021/02/21 08:11:14 by gbeco            ###   ########lyon.fr   */
+/*   Updated: 2021/06/01 16:02:54 by gbeco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../libft/libft.h"
 
-int		ft_strlen(char *s)
-{
-	int	i;
+// int	ft_strlen(const char *s)
+// {
+// 	int	i;
 
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (s && s[i])
+// 		i++;
+// 	return (i);
+// }
 
-int		isline(char *s)
+int	isline(char *s)
 {
 	int	i;
 
@@ -36,13 +37,13 @@ int		isline(char *s)
 	return (0);
 }
 
-char	*ft_strjoin(char *tmp, char *buf, int oct)
+char	*gnl_strjoin(char *tmp, char *buf, int oct)
 {
 	char	*new;
 	int		i;
 	int		j;
 
-	if (!(new = malloc(sizeof(char) * ft_strlen(tmp) + oct + 1)))
+	if (ft_salloc(&new, sizeof(char) * (ft_strlen(tmp) + oct + 1)))
 		return (NULL);
 	i = 0;
 	while (tmp && tmp[i])
@@ -73,7 +74,7 @@ char	*ft_strcdup(char *tmp)
 	i = 0;
 	while (tmp[i] && tmp[i] != '\n')
 		i++;
-	if (!(newline = malloc(sizeof(char) * i + 1)))
+	if (ft_salloc(&newline, sizeof(char) * (i + 1)))
 		return (NULL);
 	newline[i] = 0;
 	while (i-- > 0)
@@ -83,7 +84,7 @@ char	*ft_strcdup(char *tmp)
 	return (newline);
 }
 
-char	*ft_substr(char *tmp)
+char	*gnl_substr(char *tmp)
 {
 	char	*newtmp;
 	int		i;
@@ -92,7 +93,7 @@ char	*ft_substr(char *tmp)
 	i = 0;
 	while (tmp[i] && tmp[i] != '\n')
 		i++;
-	if (!(newtmp = malloc(sizeof(char) * (ft_strlen(tmp) - i))))
+	if (ft_salloc(&newtmp, sizeof(char) * (ft_strlen(tmp) - i)))
 		return (NULL);
 	i++;
 	j = 0;
